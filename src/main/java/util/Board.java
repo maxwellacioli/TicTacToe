@@ -3,6 +3,7 @@ package util;
 import java.util.ArrayList;
 import java.util.Random;
 
+//TODO separar classe board e play(Criá-la)
 public class Board {
 
 	private Integer starter;
@@ -71,6 +72,23 @@ public class Board {
 		createBoard();
 
 		starter = getStarterPlayer();
+
+		//Tutorial do jogo
+		System.out.println("Digite a posição (1 à 9) que deseja jogar:");
+		int count = 1;
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 2; j++) {
+				System.out.print(count++ + " |");
+			}
+			System.out.println(count++);
+			if (i < 2) {
+				System.out.println("-- -- --");
+			}
+		}
+		System.out.println();
+		
+		//... Implementar IA
+
 	}
 
 	// TODO
@@ -114,7 +132,7 @@ public class Board {
 			winner = boardCells.get(2);
 		}
 
-		if(winner >= 0) {
+		if (winner >= 0) {
 			return true;
 		} else {
 			return false;
@@ -132,4 +150,16 @@ public class Board {
 	public int getWinner() {
 		return winner;
 	}
+
+	// TODO remover este método ou melhora-lo (mesmos parametros de setplay)
+	public void play(int player, int position) {
+		setPlay(player, position);
+
+		System.out.println();
+		System.out.println("#############");
+		System.out.println();
+
+		printBoard();
+	}
+
 }
