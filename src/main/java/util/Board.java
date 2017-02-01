@@ -12,11 +12,16 @@ public class Board {
 	private static final Integer EMPTY_CELL = -1;
 	public static final Integer PLAYER = 1;
 	public static final Integer COMPUTER = 0;
-
-	// Cria o array das celulas do jogo
-	private void createBoard() {
+	
+	public Board() {
 		boardCells = new ArrayList<Integer>();
 
+		//FIXME verificar necessidade
+		createBoard();
+	}
+
+	// Preenche as celulas do jogo
+	private void createBoard() {
 		for (int i = 0; i < 9; i++) {
 			boardCells.add(EMPTY_CELL);
 		}
@@ -74,7 +79,7 @@ public class Board {
 		starter = getStarterPlayer();
 
 		//Tutorial do jogo
-		System.out.println("Digite a posição (1 à 9) que deseja jogar:");
+		System.out.println("Você deve escolher a posição (1 à 9) que deseja jogar.\n");
 		int count = 1;
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 2; j++) {
@@ -85,7 +90,7 @@ public class Board {
 				System.out.println("-- -- --");
 			}
 		}
-		System.out.println();
+		System.out.println("\n##############\n");
 		
 		//... Implementar IA
 
