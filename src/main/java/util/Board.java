@@ -2,24 +2,35 @@ package util;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 //TODO separar classe board e play(Criá-la)
 public class Board {
 
 	private Integer starter;
+	private int position;
 	private int winner = -1;
+	private int turnPlayer = -1;
+	private int playeds = 0; //FIXME remover
 	private ArrayList<Integer> boardCells;
 	private static final Integer EMPTY_CELL = -1;
 	public static final Integer PLAYER = 1;
 	public static final Integer COMPUTER = 0;
+	public Scanner scanner;
 	
 	public Board() {
 		boardCells = new ArrayList<Integer>();
+		//FIXME fechar variavel scanner
+		scanner = new Scanner(System.in);
 
 		//FIXME verificar necessidade
 		createBoard();
 	}
 
+	public int getPosition() {
+		return position;
+	}
+	
 	// Preenche as celulas do jogo
 	private void createBoard() {
 		for (int i = 0; i < 9; i++) {
@@ -79,7 +90,7 @@ public class Board {
 		starter = getStarterPlayer();
 
 		//Tutorial do jogo
-		System.out.println("Você deve escolher a posição (1 à 9) que deseja jogar.\n");
+		System.out.println("Você deve escolher a posição (1 à 9) do tabuleiro a ser jogada.\n");
 		int count = 1;
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 2; j++) {
@@ -92,11 +103,34 @@ public class Board {
 		}
 		System.out.println("\n##############\n");
 		
-		//... Implementar IA
-
+		turnPlayer = starter;
+		
+		//TODO ... Implementar IA
+		
+		//loop jogo
+		while(hasWinner() == false) {
+			if(turnPlayer == 0) {
+				if(playeds == 0) {
+					play(Board.COMPUTER, 5);
+				}
+				
+				
+				turnPlayer = 1;
+			} else {
+				System.out.println("Digite a posição que deseja jogar:");
+				position = scanner.nextInt();
+				play(Board.PLAYER, position);
+				
+				turnPlayer = 0;
+			}
+			
+			playeds++;
+		}
+		
+		System.out.println("O jogador " + winner + " venceu!");
 	}
 
-	// TODO
+	// TODO IA
 	public void computerDefense() {
 
 	}
@@ -146,8 +180,13 @@ public class Board {
 
 	// Verifica se existe uma reta com os três números iguais
 	private boolean verifyWinnerLine(int cell1, int cell2, int cell3) {
-		if (cell1 == cell2 && cell2 == cell3)
-			return true;
+		if (cell1 == cell2 && cell2 == cell3) {
+			if(cell1 != -1) { 
+				return true;
+			} else {
+				return false;
+			}
+		}
 		else
 			return false;
 	}
