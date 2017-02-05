@@ -10,7 +10,7 @@ public class Board {
 	private int position;
 	private int winner = -1; // FIXME verificar local correto
 	private ArrayList<Integer> boardCells;
-	private static final Integer EMPTY_CELL = -1;
+	public static final Integer EMPTY_CELL = -1;
 	public static final Integer PLAYER = 1;
 	public static final Integer COMPUTER = 0;
 

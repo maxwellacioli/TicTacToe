@@ -3,28 +3,43 @@ package util;
 import java.util.ArrayList;
 
 public class TreeNode {
-	private ArrayList<Board> childs;
-	private int cost;
+	private ArrayList<TreeNode> childs;
+	private Integer cost;
+	private Board nodeBoardState;
 	
-	public TreeNode(int cost) {
+	public TreeNode(Integer cost, Board nodeBoardState) {
 		this.cost = cost;
-		childs = new ArrayList<Board>();
+		this.nodeBoardState = nodeBoardState;
+		childs = new ArrayList<TreeNode>();
 	}
 	
-	public int getCost() {
+	public Board getNodeBoardState() {
+		return nodeBoardState;
+	}
+	
+	public void setNodeBoardState(Board nodeBoardState) {
+		this.nodeBoardState = nodeBoardState;
+	}
+	
+	public Integer getCost() {
 		return cost;
 	}
 	
-	public void setCost(int cost) {
+	public void setCost(Integer cost) {
 		this.cost = cost;
 	}
 	
-	public ArrayList<Board> getChilds() {
+	public ArrayList<TreeNode> getChilds() {
 		return childs;
 	}
 
 	public boolean isLeaf() {
 		return childs.isEmpty();
 	}
+	
+	public void addChild(TreeNode child) {
+		childs.add(child);
+	}
+	
 	//TODO Percorrer arvore
 }
